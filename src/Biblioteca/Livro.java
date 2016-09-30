@@ -26,10 +26,6 @@ public class Livro {
 
     private String categoria;
 
-    private List<Registro> emprestimoItem = new ArrayList<Registro>();
-    
-    private List<Registro> reservaItem = new ArrayList<Registro>();
-
     public Livro() { }
 
     public int getId() {
@@ -70,21 +66,4 @@ public class Livro {
     public void setCategoria(String categoria) {
             this.categoria = categoria;
     }
-
-    public List<Registro> getEmprestimoItem() {
-            return emprestimoItem;
-    }
-
-    public void setEmprestimoItem(List<Registro> emprestimoItem) {
-            this.emprestimoItem = emprestimoItem;
-    }
-    public List<Registro> getReservaItem() {
-            return reservaItem;
-    }
-
-    public void setReservaItem(List<Registro> reservaItens) {
-            this.reservaItem = reservaItens;
-    }
-
-    
 }

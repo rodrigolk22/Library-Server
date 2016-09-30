@@ -5,10 +5,40 @@
  */
 package Biblioteca;
 
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Date;
+import java.util.Calendar;
+
+
 /**
  *
  * @author redproxy
  */
 public class Registro {
     
+    private Registry referencia;
+    
+    private Date data;
+    
+    private Calendar c;
+    
+    public Registro () {}
+    
+    public void setData(){
+        this.data = c.getTime();
+    }
+    
+    public Date getData(){
+        return data;
+    }
+    
+    public void setRegistro(int porta) throws RemoteException{
+        this.referencia = LocateRegistry.createRegistry(porta);
+    }
+    
+    public Registry getRegistro(){
+        return referencia;
+    }
 }
