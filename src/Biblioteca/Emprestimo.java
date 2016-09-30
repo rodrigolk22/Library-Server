@@ -5,10 +5,24 @@
  */
 package Biblioteca;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author redproxy
  */
 public class Emprestimo {
     
+    public Emprestimo() { }
+    
+    private List<Registro> emprestimoItem = new ArrayList<Registro>();
+    
+    public List<Registro> getEmprestimoItems() {
+		return emprestimoItem;
+    }
+
+    public void setEmprestimoItem(List<Registro> emprestimoItem) {
+		this.emprestimoItem = emprestimoItem;
+    }
 }

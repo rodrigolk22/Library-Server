@@ -12,17 +12,17 @@ import java.util.List;
  *
  * @author redproxy
  */
-public class Reserva {
+public class Penalidade {
     
-    public Reserva () { }
+    public Penalidade() { }
     
-    private List<Registro> reservaItem = new ArrayList<Registro>();
+    private List<Registro> penalidadeItem = new ArrayList<Registro>();
     
-    public List<Registro> getReservaItems() {
-		return reservaItem;
+    public List<Registro> getPenalidadeItems() {
+		return penalidadeItem;
     }
 
-    public void setReservaItem(List<Registro> reservaItem) {
-		this.reservaItem = reservaItem;
+    public void setPenalidadeItem(List<Registro> penalidadeItem) {
+		this.penalidadeItem = penalidadeItem;
     }
 }
