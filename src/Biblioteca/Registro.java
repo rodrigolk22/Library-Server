@@ -20,7 +20,7 @@ public class Registro {
     
     private Registry referencia;
     
-    private int livroId;
+    private int id;
     
     private Date data;
     
@@ -36,11 +36,11 @@ public class Registro {
         return data;
     }
     public void setLivroId(int livroId){
-        this.livroId = livroId;
+        this.id = livroId;
     }
     
     public int getLivroId(){
-        return livroId;
+        return id;
     }
     
     public void setRegistro(int porta) throws RemoteException{

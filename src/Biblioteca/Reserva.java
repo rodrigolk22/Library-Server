@@ -16,13 +16,10 @@ public class Reserva {
     
     public Reserva () { }
     
-    private List<Registro> reservaItem = new ArrayList<Registro>();
+    private List<Registro> reserva = new ArrayList<Registro>();
     
-    public List<Registro> getReservaItems() {
-		return reservaItem;
+    public List<Registro> getReserva() {
+		return reserva;
     }
 
-    public void setReservaItem(List<Registro> reservaItem) {
-		this.reservaItem = reservaItem;
-    }
 }

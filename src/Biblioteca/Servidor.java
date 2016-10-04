@@ -43,9 +43,7 @@ public class Servidor {
             
             estoque.adicionaLivro(livro_1);
             
-            
-            
-            System.out.println("Livro 1 existe?"+estoque.contemLivro(1));
+            //System.out.println("Livro 1 existe?"+estoque.contemLivro(1));
             
         } catch (RemoteException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);

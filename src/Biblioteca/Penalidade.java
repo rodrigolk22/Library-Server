@@ -19,13 +19,10 @@ public class Penalidade {
      */
     public Penalidade() { }
     
-    private List<Registro> penalidadeItem = new ArrayList<Registro>();
+    private List<Registro> penalidade = new ArrayList<Registro>();
     
-    public List<Registro> getPenalidadeItems() {
-		return penalidadeItem;
+    public List<Registro> getPenalidade() {
+		return penalidade;
     }
 
-    public void setPenalidadeItem(List<Registro> penalidadeItem) {
-		this.penalidadeItem = penalidadeItem;
-    }
 }

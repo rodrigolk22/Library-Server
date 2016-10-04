@@ -16,13 +16,10 @@ public class Emprestimo {
     
     public Emprestimo() { }
     
-    private List<Registro> emprestimoItem = new ArrayList<Registro>();
+    private List<Registro> emprestimo = new ArrayList<Registro>();
     
-    public List<Registro> getEmprestimoItems() {
-		return emprestimoItem;
+    public List<Registro> getEmprestimo() {
+		return emprestimo;
     }
 
-    public void setEmprestimoItem(List<Registro> emprestimoItem) {
-		this.emprestimoItem = emprestimoItem;
-    }
 }

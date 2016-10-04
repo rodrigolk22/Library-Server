@@ -49,7 +49,7 @@ public class Estoque {
         }
     }
     
-    public void atualizaLivro(List<Livro> estoqueLivro, Livro livro){
+    public void atualizaLivro(Livro livro){
         int i = 0;
         for(Livro l : estoqueLivro){
             i++;
@@ -60,7 +60,7 @@ public class Estoque {
         }
     }
     
-    public Livro consultaLivroId(List<Livro> estoqueLivro, int Id){
+    public Livro consultaLivroId(int Id){
         Livro livro = new Livro();
         for(Livro l : estoqueLivro){
             if(l.getId() == Id){

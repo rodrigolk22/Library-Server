@@ -21,11 +21,15 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         
     }
 
+    Estoque estoque = new Estoque();
+    
     @Override
-    public void consultarLivro(String nomeCli, InterfaceCli interfaceCli) throws RemoteException {
+    public void consultarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException {
         try {
             // invocação remota
-            interfaceCli.exibir(nomeCli);
+            if(estoque.contemLivro(livroId)){
+                interfaceCli.exibir(33);
+            }
         } catch (RemoteException ex) {
             Logger.getLogger(ServImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
