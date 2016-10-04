@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author redproxy
+ * @author Rodrigo e Jordan
  */
 public class Registro {
     

@@ -10,10 +10,13 @@ import java.util.List;
 
 /**
  *
- * @author redproxy
+ * @author Rodrigo e Jordan
  */
 public class Penalidade {
     
+    /**
+     *
+     */
     public Penalidade() { }
     
     private List<Registro> penalidadeItem = new ArrayList<Registro>();

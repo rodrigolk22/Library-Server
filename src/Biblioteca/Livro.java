@@ -5,20 +5,18 @@
  */
 package Biblioteca;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  *
- * @author redproxy
+ * @author Rodrigo e Jordan
  */
 
 public class Livro {
     
     private int id;
     
-    private int estoque;
+    private int quantidade;
 
     private String titulo;
 
@@ -36,12 +34,12 @@ public class Livro {
             this.id = id;
     }
     
-    public int getEstoque() {
-            return estoque;
+    public int getQuantidade() {
+            return quantidade;
     }
 
-    public void setEstoque(int estoque) {
-            this.estoque = estoque;
+    public void setQuantidade(int quantidade) {
+            this.quantidade = quantidade;
     }
 
     public String getTitulo() {

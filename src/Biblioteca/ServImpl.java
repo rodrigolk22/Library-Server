@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jordan
+ * @author Rodrigo e Jordan
  */
 public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
 
@@ -22,10 +22,10 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     }
 
     @Override
-    public void chamar(String nomeCli, InterfaceCli interfaceCli) throws RemoteException {
+    public void consultarLivro(String nomeCli, InterfaceCli interfaceCli) throws RemoteException {
         try {
-            // inovocação remota
-            interfaceCli.echo(nomeCli);
+            // invocação remota
+            interfaceCli.exibir(nomeCli);
         } catch (RemoteException ex) {
             Logger.getLogger(ServImpl.class.getName()).log(Level.SEVERE, null, ex);
         }

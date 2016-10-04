@@ -15,10 +15,12 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author jordan
+ * @author Rodrigo e Jordan
  */
 public class Servidor {
 
+    public static Livro novoLivro = new Livro();
+  
     /**
      * @param args the command line arguments
      */
@@ -30,11 +32,16 @@ public class Servidor {
             ServImpl servImpl = new ServImpl();
             
             // adiciona referencia de servImpl no serviço de nomes
-            referenciaServicoNomes.rebind("ServidorHelloWorld", servImpl);
+            referenciaServicoNomes.rebind("Servidor_Biblioteca", servImpl);
+            
+            novoLivro.setId(1);
+            //System.out.println(novoLivro.getId());
             
         } catch (RemoteException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
+    
     
 }

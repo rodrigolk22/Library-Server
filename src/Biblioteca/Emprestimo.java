@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author redproxy
+ * @author Rodrigo e Jordan
  */
 public class Emprestimo {
     
