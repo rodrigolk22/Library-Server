@@ -21,28 +21,52 @@ public class Estoque {
 		return estoqueLivro;
     }
 
-    public void setEstoque(List<Livro> estoqueLivro) {
-		this.estoqueLivro = estoqueLivro;
+    public void setEstoque(List<Livro> novo_estoqueLivro) {
+	estoqueLivro = novo_estoqueLivro;
     }
     
-    public void adicionaLivro(List<Livro> estoqueLivro, Livro livro){
+    public void adicionaLivro(Livro livro){
         estoqueLivro.add(livro);
     }
     
-    public boolean contemLivro(List<Livro> estoqueLivro, Livro livro){  
-        return estoqueLivro.contains(livro);
-    }
-    
-    public void removeLivro(List<Livro> estoqueLivro, Livro livro){
-        estoqueLivro.remove(livro);
-    }
-    
-    public void atualizaLivro(List<Livro> estoqueLivro, Livro livro){
+    public boolean contemLivro(int Id){
+        Livro livro = new Livro();
         for(Livro l : estoqueLivro){
-            if(l.getId() == livro.getId()){
-                l = livro;
+            if(l.getId() == Id){
+                livro = l;
                 break;
              }
         }
+        return estoqueLivro.contains(livro);
+    }
+    
+    public void removeLivro(int Id){
+        for(Livro l : estoqueLivro){
+            if(l.getId() == Id){
+                estoqueLivro.remove(l);
+                break;
+             }
+        }
+    }
+    
+    public void atualizaLivro(List<Livro> estoqueLivro, Livro livro){
+        int i = 0;
+        for(Livro l : estoqueLivro){
+            i++;
+            if(l.getId() == livro.getId()){
+                estoqueLivro.set(i, livro);
+                break;
+             }
+        }
+    }
+    
+    public Livro consultaLivroId(List<Livro> estoqueLivro, int Id){
+        Livro livro = new Livro();
+        for(Livro l : estoqueLivro){
+            if(l.getId() == Id){
+                livro = l;
+             }
+        }
+        return livro;
     }
 }

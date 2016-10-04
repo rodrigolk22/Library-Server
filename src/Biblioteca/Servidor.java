@@ -19,7 +19,8 @@ import java.util.logging.Logger;
  */
 public class Servidor {
 
-    public static Livro novoLivro = new Livro();
+    public static Livro livro_1 = new Livro();
+    public static Estoque estoque = new Estoque();
   
     /**
      * @param args the command line arguments
@@ -34,8 +35,17 @@ public class Servidor {
             // adiciona referencia de servImpl no serviço de nomes
             referenciaServicoNomes.rebind("Servidor_Biblioteca", servImpl);
             
-            novoLivro.setId(1);
-            //System.out.println(novoLivro.getId());
+            livro_1.setId(1);
+            livro_1.setAutor("Murilo Barros Cunha");
+            livro_1.setTitulo("Lendas Perdidas");
+            livro_1.setCategoria("Literatura Brasileira");
+            livro_1.setQuantidade(2);
+            
+            estoque.adicionaLivro(livro_1);
+            
+            
+            
+            System.out.println("Livro 1 existe?"+estoque.contemLivro(1));
             
         } catch (RemoteException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
