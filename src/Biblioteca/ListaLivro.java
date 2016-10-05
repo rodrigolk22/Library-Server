@@ -13,6 +13,7 @@ import java.util.List;
  * @author redproxy
  */
 public class ListaLivro {
+    
     public ListaLivro() { }
     
     private List<Livro> listaLivro = new ArrayList<Livro>();
@@ -60,13 +61,26 @@ public class ListaLivro {
         }
     }
     
-    public List consultaLivroId(int Id){
+    public List listarTodosLivros(){
+        return listaLivro;
+    } 
+    
+    public List listarLivrosDisponiveis(){
         List<Livro> lista = new ArrayList<>();
         for (Livro l : listaLivro) {
-            if(l.getId() == Id){
+            if(l.getQuantidade() > 0){
                 lista.add(l);
             }
         }
         return lista;
+    } 
+    
+    public Livro consultaLivro(int Id){
+        for (Livro l : listaLivro) {
+            if(l.getId() == Id){
+                return l;
+            }
+        }
+        return null;
     }
 }

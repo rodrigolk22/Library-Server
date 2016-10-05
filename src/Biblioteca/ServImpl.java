@@ -37,18 +37,14 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         
     }
     
-    /**
-     *
-     * @param livroId
-     * @param interfaceCli
-     * @return
-     * @throws RemoteException
-     */
+    
     @Override
-    public List consultarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException {
-        
-        // invocação remota
-        return listaLivro.consultaLivroId(livroId);
+    public List<Livro> consultarTodosLivros() throws RemoteException {
+        return listaLivro.listarTodosLivros();
+    }
+    
+    public Livro consultarLivro(int livroId) throws RemoteException {
+        return listaLivro.consultaLivro(livroId);
     }
     
     /**
@@ -59,7 +55,11 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
      */
     @Override
     public String emprestarLivro(int livroId) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        // PROCURAR LIVRO PELO ID
+        // criar uma lista de livros 
+        // se retornar mais de 1 livro, dar um erro
+        return "";
     }
 
     @Override
@@ -69,11 +69,20 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
 
     @Override
     public String devolverLivro(int livroId) throws RemoteException {
+        // listaregistro
+        // roe
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public String reservarLivro(int livroId) throws RemoteException {
+    public String reservarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException {
+        
+        
+        
+        // proocurar livro
+        // verificar se o usuário possui multa
+        // criar reserva (salvando a rferência da InterfaceCli)
+        // adicionar reserva na lista
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

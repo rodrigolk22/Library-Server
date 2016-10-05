@@ -6,8 +6,6 @@
 package Biblioteca;
 
 import java.rmi.registry.Registry;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -15,14 +13,14 @@ import java.util.List;
  */
 public class Reserva extends Registro {
     
-    private Registry referencia;
+    private InterfaceCli interfaceCli;
 
-    public Registry getReferencia() {
-        return referencia;
+    public InterfaceCli getInterfaceCli() {
+        return interfaceCli;
     }
 
-    public void setReferencia(Registry referencia) {
-        this.referencia = referencia;
-    }    
+    public void setInterfaceCli(InterfaceCli interfaceCli) {
+        this.interfaceCli = interfaceCli;
+    }
 
 }

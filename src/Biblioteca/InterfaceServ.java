@@ -13,9 +13,10 @@ import java.util.List;
  * @author Rodrigo e Jordan
  */
 public interface InterfaceServ extends Remote {
-    public List consultarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException;
+    public List<Livro> consultarTodosLivros() throws RemoteException;
+    public Livro consultarLivro(int livroId) throws RemoteException;
     public String emprestarLivro(int livroId) throws RemoteException;
     public String renovarLivro(int livroId) throws RemoteException;
     public String devolverLivro(int livroId) throws RemoteException;
-    public String reservarLivro(int livroId) throws RemoteException;
+    public String reservarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException;
 }
