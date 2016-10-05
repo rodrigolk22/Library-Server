@@ -19,7 +19,7 @@ public class Reserva {
     private List<Registro> reserva = new ArrayList<Registro>();
     
     public List<Registro> getReserva() {
-		return reserva;
+        return reserva;
     }
 
 }

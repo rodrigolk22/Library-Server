@@ -20,13 +20,23 @@ public class Registro {
     
     private Registry referencia;
     
-    private int id;
+    private String nome;
+    
+    private int livroId;
     
     private Date data;
     
     private Calendar c;
     
     public Registro () {}
+    
+    public String getNome() {
+        return nome;
+    }
+    
+    public void setNome(String nome){
+        this.nome = nome;
+    }
     
     public void setData(){
         this.data = c.getTime();
@@ -36,11 +46,11 @@ public class Registro {
         return data;
     }
     public void setLivroId(int livroId){
-        this.id = livroId;
+        this.livroId = livroId;
     }
     
     public int getLivroId(){
-        return id;
+        return livroId;
     }
     
     public void setRegistro(int porta) throws RemoteException{

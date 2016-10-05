@@ -5,6 +5,8 @@
  */
 package Biblioteca;
 
+import java.io.Serializable;
+
 
 
 /**
@@ -12,7 +14,7 @@ package Biblioteca;
  * @author Rodrigo e Jordan
  */
 
-public class Livro {
+public class Livro implements Serializable {
     
     private int id;
     

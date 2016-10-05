@@ -7,11 +7,12 @@ package Biblioteca;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
  * @author Rodrigo e Jordan
  */
 public interface InterfaceServ extends Remote {
-    public void consultarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException;
+    public List consultarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException;
 }

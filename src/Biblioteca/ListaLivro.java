@@ -12,38 +12,38 @@ import java.util.List;
  *
  * @author redproxy
  */
-public class Estoque {
-    public Estoque() { }
+public class ListaLivro {
+    public ListaLivro() { }
     
-    private List<Livro> estoqueLivro = new ArrayList<Livro>();
+    private List<Livro> listaLivro = new ArrayList<Livro>();
     
-    public List<Livro> getEstoque() {
-		return estoqueLivro;
+    public List<Livro> getLista() {
+		return listaLivro;
     }
 
-    public void setEstoque(List<Livro> novo_estoqueLivro) {
-	estoqueLivro = novo_estoqueLivro;
+    public void setLista(List<Livro> novo_listaLivro) {
+	listaLivro = novo_listaLivro;
     }
     
     public void adicionaLivro(Livro livro){
-        estoqueLivro.add(livro);
+        listaLivro.add(livro);
     }
     
     public boolean contemLivro(int Id){
         Livro livro = new Livro();
-        for(Livro l : estoqueLivro){
+        for(Livro l : listaLivro){
             if(l.getId() == Id){
                 livro = l;
                 break;
              }
         }
-        return estoqueLivro.contains(livro);
+        return listaLivro.contains(livro);
     }
     
     public void removeLivro(int Id){
-        for(Livro l : estoqueLivro){
+        for(Livro l : listaLivro){
             if(l.getId() == Id){
-                estoqueLivro.remove(l);
+                listaLivro.remove(l);
                 break;
              }
         }
@@ -51,22 +51,22 @@ public class Estoque {
     
     public void atualizaLivro(Livro livro){
         int i = 0;
-        for(Livro l : estoqueLivro){
+        for(Livro l : listaLivro){
             i++;
             if(l.getId() == livro.getId()){
-                estoqueLivro.set(i, livro);
+                listaLivro.set(i, livro);
                 break;
              }
         }
     }
     
-    public Livro consultaLivroId(int Id){
-        Livro livro = new Livro();
-        for(Livro l : estoqueLivro){
+    public List consultaLivroId(int Id){
+        List<Livro> lista = new ArrayList<>();
+        for (Livro l : listaLivro) {
             if(l.getId() == Id){
-                livro = l;
-             }
+                lista.add(l);
+            }
         }
-        return livro;
+        return lista;
     }
 }
