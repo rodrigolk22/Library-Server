@@ -13,6 +13,5 @@ import java.rmi.RemoteException;
  * @author Rodrigo e Jordan
  */
 public interface InterfaceCli extends Remote {
-    public void consultarLivro(int id) throws RemoteException;
     public void exibir(int livroId) throws RemoteException;
 }

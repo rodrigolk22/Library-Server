@@ -18,8 +18,6 @@ import java.util.Calendar;
  */
 public class Registro {
     
-    private Registry referencia;
-    
     private String nome;
     
     private int livroId;
@@ -51,13 +49,5 @@ public class Registro {
     
     public int getLivroId(){
         return livroId;
-    }
-    
-    public void setRegistro(int porta) throws RemoteException{
-        this.referencia = LocateRegistry.createRegistry(porta);
-    }
-    
-    public Registry getRegistro(){
-        return referencia;
     }
 }

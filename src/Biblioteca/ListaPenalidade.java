@@ -5,7 +5,6 @@
  */
 package Biblioteca;
 
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +12,17 @@ import java.util.List;
  *
  * @author Rodrigo e Jordan
  */
-public class Reserva extends Registro {
+public class ListaPenalidade extends Registro{
     
-    private Registry referencia;
-
-    public Registry getReferencia() {
-        return referencia;
+    /**
+     *
+     */
+    public ListaPenalidade() { }
+    
+    private List<Registro> penalidade = new ArrayList<Registro>();
+    
+    public List<Registro> getPenalidade() {
+		return penalidade;
     }
-
-    public void setReferencia(Registry referencia) {
-        this.referencia = referencia;
-    }    
 
 }

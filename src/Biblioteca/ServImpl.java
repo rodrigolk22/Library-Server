@@ -51,6 +51,30 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         return listaLivro.consultaLivroId(livroId);
     }
     
-    
+    /**
+     * 
+     * @param livroId
+     * @return
+     * @throws RemoteException 
+     */
+    @Override
+    public String emprestarLivro(int livroId) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String renovarLivro(int livroId) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String devolverLivro(int livroId) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String reservarLivro(int livroId) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

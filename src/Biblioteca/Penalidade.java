@@ -12,17 +12,6 @@ import java.util.List;
  *
  * @author Rodrigo e Jordan
  */
-public class Penalidade {
-    
-    /**
-     *
-     */
-    public Penalidade() { }
-    
-    private List<Registro> penalidade = new ArrayList<Registro>();
-    
-    public List<Registro> getPenalidade() {
-		return penalidade;
-    }
+public class Penalidade extends Registro {
 
 }

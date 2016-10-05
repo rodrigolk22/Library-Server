@@ -5,21 +5,10 @@
  */
 package Biblioteca;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Rodrigo e Jordan
  */
-public class Emprestimo {
+public class Emprestimo extends Registro {
     
-    public Emprestimo() { }
-    
-    private List<Registro> emprestimo = new ArrayList<Registro>();
-    
-    public List<Registro> getEmprestimo() {
-		return emprestimo;
-    }
-
 }
