@@ -14,13 +14,15 @@ import java.util.List;
  */
 public class ListaReserva extends Registro {
     
-    private List<Registro> listaReserva;
+    public ListaReserva() { }
     
-    public ListaReserva(ArrayList<Registro> listaReserva){
+    private List<Reserva> listaReserva = new ArrayList<Reserva>();
+    
+    public ListaReserva(ArrayList<Reserva> listaReserva){
         this.listaReserva = listaReserva;
     }
     
-    public List<Registro> getListaReserva() {
+    public List<Reserva> getListaReserva() {
         return listaReserva;
     }
 

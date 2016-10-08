@@ -12,16 +12,16 @@ import java.util.List;
  *
  * @author Rodrigo e Jordan
  */
-public class ListaPenalidade extends Registro{
+public class ListaPenalidade{
     
     /**
      *
      */
     public ListaPenalidade() { }
     
-    private List<Registro> penalidade = new ArrayList<Registro>();
+    private List<Penalidade> penalidade = new ArrayList<Penalidade>();
     
-    public List<Registro> getPenalidade() {
+    public List<Penalidade> getPenalidade() {
 		return penalidade;
     }
 

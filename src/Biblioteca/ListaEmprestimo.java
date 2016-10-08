@@ -16,12 +16,34 @@ public class ListaEmprestimo {
     
     public ListaEmprestimo() { }
     
-    private List<Registro> emprestimo = new ArrayList<Registro>();
+    private List<Emprestimo> listaEmprestimo = new ArrayList<Emprestimo>();
     
-    public List<Registro> getEmprestimo() {
-		return emprestimo;
+    public List<Emprestimo> getEmprestimo() {
+	return listaEmprestimo;
     }
     
+    public void adicionaEmprestimo(Emprestimo emprestimo){
+        listaEmprestimo.add(emprestimo);
+    }
     
+    public void retiraEmprestimo(int livroId){
+        for (Emprestimo e : listaEmprestimo) {
+            if(e.getLivroId() == livroId){
+                listaEmprestimo.remove(e);
+                break;
+            }
+        }
+        
+    }
+    
+    public int totalLivrosEmprestados(String nome){
+        int quantidadeLivro = 0;
+        for (Emprestimo e : listaEmprestimo) {
+            if(e.getNome() == nome){
+                quantidadeLivro++;
+            }
+        }
+        return quantidadeLivro;
+    }
 
 }

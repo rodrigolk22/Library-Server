@@ -16,6 +16,9 @@ import java.util.List;
 public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     
     public static ListaLivro listaLivro = new ListaLivro();
+    public static ListaEmprestimo listaEmprestimo = new ListaEmprestimo();
+    public static ListaPenalidade listaPenalidade = new ListaPenalidade();
+    public static ListaReserva listaReserva = new ListaReserva();
     
     public ServImpl() throws RemoteException {
         
@@ -78,12 +81,23 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
      * @throws RemoteException 
      */
     @Override
-    public String emprestarLivro(int livroId) throws RemoteException {
-        
-        // PROCURAR LIVRO PELO ID
-        // criar uma lista de livros 
-        // se retornar mais de 1 livro, dar um erro
-        return "";
+    public String emprestarLivro(int livroId, String nome) throws RemoteException {
+        Livro consulta = null;
+        consulta = listaLivro.consultaLivro(livroId);
+        if(consulta == null){
+            return "Livro não encontrado! Empréstimo não efetuado!";
+        }else if(consulta.getQuantidade() == 0){
+            return "Não há unidades disponíveis para empréstimo! Empréstimo não efetuado!";
+        }else if(listaEmprestimo.totalLivrosEmprestados(nome) == 3){
+            return "O limite de livros para empréstimo foi atingido! Empréstimo não efetuado!";
+        }
+        consulta.reduzQuantidade();
+        Emprestimo emprestimo = new Emprestimo();
+        emprestimo.setNome(nome);
+        emprestimo.setData();
+        emprestimo.setLivroId(livroId);
+        listaEmprestimo.adicionaEmprestimo(emprestimo);
+        return "Empréstimo foi efetuado!";
     }
 
     @Override
