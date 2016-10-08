@@ -17,6 +17,6 @@ public interface InterfaceServ extends Remote {
     public Livro consultarLivro(int livroId) throws RemoteException;
     public String emprestarLivro(int livroId) throws RemoteException;
     public String renovarLivro(int livroId) throws RemoteException;
-    public String devolverLivro(int livroId) throws RemoteException;
+    public String devolverLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException;
     public String reservarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException;
 }

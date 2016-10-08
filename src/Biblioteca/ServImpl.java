@@ -29,11 +29,35 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
 
         Livro livro_2 = new Livro();
         livro_2.setId(2);
-        livro_2.setAutor("Leandro e leonardo");
-        livro_2.setTitulo("Lendas Perdidas 2");
-        livro_2.setCategoria("Literatura Brasileira");
-        livro_2.setQuantidade(21);
+        livro_2.setAutor("Daniel Goncalves Barbosa");
+        livro_2.setTitulo("Ruínas Ancestrais");
+        livro_2.setCategoria("História");
+        livro_2.setQuantidade(3);
         listaLivro.adicionaLivro(livro_2);
+        
+        Livro livro_3 = new Livro();
+        livro_3.setId(3);
+        livro_3.setAutor("Bruna Fernandes Azevedo");
+        livro_3.setTitulo("Eu a patroa e as crianças");
+        livro_3.setCategoria("Psicologia");
+        livro_3.setQuantidade(2);
+        listaLivro.adicionaLivro(livro_3);
+        
+        Livro livro_4 = new Livro();
+        livro_4.setId(4);
+        livro_4.setAutor("André Marques");
+        livro_4.setTitulo("50 receitas com mocotó");
+        livro_4.setCategoria("Culinária");
+        livro_4.setQuantidade(4);
+        listaLivro.adicionaLivro(livro_4);
+        
+        Livro livro_5 = new Livro();
+        livro_5.setId(5);
+        livro_5.setAutor("Lara Sousa Pereira");
+        livro_5.setTitulo("Bandeirantes modernos");
+        livro_5.setCategoria("Literatura Brasileira");
+        livro_5.setQuantidade(3);
+        listaLivro.adicionaLivro(livro_5);
         
     }
     
@@ -68,7 +92,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     }
 
     @Override
-    public String devolverLivro(int livroId) throws RemoteException {
+    public String devolverLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException {
         // listaregistro
         // roe
         
