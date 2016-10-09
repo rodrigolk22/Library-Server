@@ -5,6 +5,9 @@
  */
 package Biblioteca;
 
+import Biblioteca.Entidades.*;
+import Biblioteca.Interfaces.InterfaceCli;
+import Biblioteca.Interfaces.InterfaceServ;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -15,112 +18,62 @@ import java.util.List;
  */
 public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     
-    public static ListaLivro listaLivro = new ListaLivro();
-    public static ListaEmprestimo listaEmprestimo = new ListaEmprestimo();
-    public static ListaPenalidade listaPenalidade = new ListaPenalidade();
-    public static ListaReserva listaReserva = new ListaReserva();
-    
-    public ServImpl() throws RemoteException {
-        
-        Livro livro_1 = new Livro();
-        livro_1.setId(1);
-        livro_1.setAutor("Murilo Barros Cunha");
-        livro_1.setTitulo("Lendas Perdidas");
-        livro_1.setCategoria("Literatura Brasileira");
-        livro_1.setQuantidade(2);
-        listaLivro.adicionaLivro(livro_1);
-
-        Livro livro_2 = new Livro();
-        livro_2.setId(2);
-        livro_2.setAutor("Daniel Goncalves Barbosa");
-        livro_2.setTitulo("Ruínas Ancestrais");
-        livro_2.setCategoria("História");
-        livro_2.setQuantidade(3);
-        listaLivro.adicionaLivro(livro_2);
-        
-        Livro livro_3 = new Livro();
-        livro_3.setId(3);
-        livro_3.setAutor("Bruna Fernandes Azevedo");
-        livro_3.setTitulo("Eu a patroa e as crianças");
-        livro_3.setCategoria("Psicologia");
-        livro_3.setQuantidade(2);
-        listaLivro.adicionaLivro(livro_3);
-        
-        Livro livro_4 = new Livro();
-        livro_4.setId(4);
-        livro_4.setAutor("André Marques");
-        livro_4.setTitulo("50 receitas com mocotó");
-        livro_4.setCategoria("Culinária");
-        livro_4.setQuantidade(4);
-        listaLivro.adicionaLivro(livro_4);
-        
-        Livro livro_5 = new Livro();
-        livro_5.setId(5);
-        livro_5.setAutor("Lara Sousa Pereira");
-        livro_5.setTitulo("Bandeirantes modernos");
-        livro_5.setCategoria("Literatura Brasileira");
-        livro_5.setQuantidade(3);
-        listaLivro.adicionaLivro(livro_5);
-        
-    }
-    
+    public ServImpl() throws RemoteException {}
     
     @Override
     public List<Livro> consultarTodosLivros() throws RemoteException {
-        return listaLivro.listarTodosLivros();
+        return Servidor.listaLivro.todos();
     }
     
-    public Livro consultarLivro(int livroId) throws RemoteException {
-        return listaLivro.consultaLivro(livroId);
-    }
-    
-    /**
-     * 
-     * @param livroId
-     * @return
-     * @throws RemoteException 
-     */
     @Override
-    public String emprestarLivro(int livroId, String nome) throws RemoteException {
-        Livro consulta = null;
-        consulta = listaLivro.consultaLivro(livroId);
-        if(consulta == null){
+    public Livro consultarLivro(int livroId) throws RemoteException {
+        return Servidor.listaLivro.consultar(livroId);
+    }
+
+    @Override
+    public String emprestarLivro(int livroId, String clienteNome) throws RemoteException {
+        
+        Livro livro = Servidor.listaLivro.consultar(livroId);
+        
+        if(livro == null){
             return "Livro não encontrado! Empréstimo não efetuado!";
-        }else if(consulta.getQuantidade() == 0){
+        }else if(livro.getQuantidade() == 0){
             return "Não há unidades disponíveis para empréstimo! Empréstimo não efetuado!";
-        }else if(listaEmprestimo.totalLivrosEmprestados(nome) == 3){
+        }else if(Servidor.listaEmprestimo.totalLivrosEmprestados(clienteNome) == Config.QUANTIDADE_MAXIMA_EMPRESTIMOS){
             return "O limite de livros para empréstimo foi atingido! Empréstimo não efetuado!";
         }
-        consulta.reduzQuantidade();
-        Emprestimo emprestimo = new Emprestimo();
-        emprestimo.setNome(nome);
-        emprestimo.setData();
-        emprestimo.setLivroId(livroId);
-        listaEmprestimo.adicionaEmprestimo(emprestimo);
+        
+        livro.reduzirQuantidade();
+        
+        Emprestimo emprestimo = new Emprestimo(livroId, clienteNome);
+        Servidor.listaEmprestimo.adicionar(emprestimo);
+        
+        System.out.println(emprestimo);
+        
         return "Empréstimo foi efetuado!";
     }
 
     @Override
     public String renovarLivro(int livroId) throws RemoteException {
+        
+        // TODO
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public String devolverLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException {
-        // listaregistro
-        // roe
+    public String devolverLivro(int livroId) throws RemoteException {
+        
+        // TODO
         
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String reservarLivro(int livroId, InterfaceCli interfaceCli) throws RemoteException {
+    @Override
+    public String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli) throws RemoteException {
         
+        // TODO
         
-        
-        // proocurar livro
-        // verificar se o usuário possui multa
-        // criar reserva (salvando a rferência da InterfaceCli)
-        // adicionar reserva na lista
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

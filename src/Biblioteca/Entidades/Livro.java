@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Biblioteca;
+package Biblioteca.Entidades;
 
 import java.io.Serializable;
 
@@ -29,49 +29,61 @@ public class Livro implements Serializable {
     public Livro() { }
 
     public int getId() {
-            return id;
+        return id;
     }
 
     public void setId(int id) {
-            this.id = id;
+        this.id = id;
     }
     
     public int getQuantidade() {
-            return quantidade;
+        return quantidade;
     }
 
     public void setQuantidade(int quantidade) {
-            this.quantidade = quantidade;
+        this.quantidade = quantidade;
     }
     
-    public void reduzQuantidade() {
-            this.quantidade--;
+    public void reduzirQuantidade() {
+        this.quantidade--;
     }
     
-    public void aumentaQuantidade() {
-            this.quantidade++;
+    public void aumentarQuantidade() {
+        this.quantidade++;
     }
 
     public String getTitulo() {
-            return titulo;
+        return titulo;
     }
 
     public void setTitulo(String titulo) {
-            this.titulo = titulo;
+        this.titulo = titulo;
     }
 
     public String getAutor() {
-            return autor;
+        return autor;
     }
 
     public void setAutor(String autor) {
-            this.autor = autor;
+        this.autor = autor;
     }
+    
     public String getCategoria() {
-            return categoria;
+        return categoria;
     }
 
     public void setCategoria(String categoria) {
-            this.categoria = categoria;
+        this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Livro{" 
+                + "id=" + id 
+                + ", quantidade=" + quantidade 
+                + ", titulo=" + titulo 
+                + ", autor=" + autor 
+                + ", categoria=" + categoria 
+                + '}';
     }
 }
