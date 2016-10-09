@@ -16,9 +16,9 @@ public interface InterfaceCli extends Remote {
     
     /**
      * Método remoto para exibir o aviso de um livro disponível
-     * @param livroId
+     * @param mensagem
      * @throws RemoteException 
      */
-    public void exibir(int livroId) throws RemoteException;
+    public void notificar(String mensagem) throws RemoteException;
     
 }

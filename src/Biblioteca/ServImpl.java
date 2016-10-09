@@ -48,7 +48,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         Emprestimo emprestimo = new Emprestimo(livroId, clienteNome);
         Servidor.listaEmprestimo.adicionar(emprestimo);
         
-        System.out.println(emprestimo);
+        System.out.println("Novo empréstimo:" + emprestimo);
         
         return "Empréstimo foi efetuado!";
     }
