@@ -45,7 +45,7 @@ public interface InterfaceServ extends Remote {
      * @return
      * @throws RemoteException 
      */
-    public String renovarLivro(int livroId) throws RemoteException;
+    public String renovarLivro(int livroId, String clienteNome) throws RemoteException;
     
     /**
      * Método remoto para devolver um livro emprestado ao acervo.

@@ -1,6 +1,6 @@
 package Biblioteca.Listas;
 
-import Biblioteca.Entidades.Reserva;
+import Biblioteca.Entidades.Penalidade;
 import Biblioteca.Entidades.Reserva;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +35,7 @@ public class ListaReserva {
         }
     }
     
-    public boolean verificaRedundancia(String clienteNome, int livroId){
+    public boolean contem(String clienteNome, int livroId){
         String nome;
         for (Reserva r : listaReserva) {
             if(clienteNome.equals(r.getClienteNome()) && r.getLivroId() == livroId){
@@ -55,4 +55,15 @@ public class ListaReserva {
             }
         }
     }
+    
+    public int interesse(int livroId){
+        int interessados = 0;
+        for (Reserva r : listaReserva) {
+            if(r.getLivroId() == livroId){
+                interessados++;
+            }
+        }
+        return interessados;
+    }
+    
 }

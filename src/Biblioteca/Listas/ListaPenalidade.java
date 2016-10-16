@@ -7,6 +7,7 @@ package Biblioteca.Listas;
 
 import Biblioteca.Entidades.Penalidade;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,5 +25,18 @@ public class ListaPenalidade {
     public List<Penalidade> getListaPenalidade() {
         return listaPenalidade;
     }
-
+    
+    public void adicionar(Penalidade penalidade){
+        listaPenalidade.add(penalidade);
+    }
+    public int pendencia(String clienteNome) {
+        int pendencia = 0;
+        Date dataAtual = new Date(System.currentTimeMillis());
+        for (Penalidade p : listaPenalidade) {
+            if(clienteNome.equals(p.getClienteNome())){
+                pendencia++;
+            }
+        }
+        return pendencia;
+    }
 }

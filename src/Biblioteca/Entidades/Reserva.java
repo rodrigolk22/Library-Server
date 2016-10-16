@@ -65,6 +65,7 @@ public class Reserva extends Registro {
         c.setTime(this.dataReserva);
         c.add(Calendar.DATE, +tempoEspera);
         this.dataReserva = c.getTime();
+        
     }
     
     @Override

@@ -17,9 +17,9 @@ public class Penalidade extends Registro {
     
     private Date dataValidade;
 
-    public Penalidade() {
-        
-        // calcula a data de valdiade da penalidade
+    public Penalidade(String clienteNome) {
+        setClienteNome(clienteNome);
+        // calcula a data de validade da penalidade
         dataValidade = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance(); 
         c.setTime(dataValidade); 
