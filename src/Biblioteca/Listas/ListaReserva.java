@@ -3,6 +3,7 @@ package Biblioteca.Listas;
 import Biblioteca.Entidades.Reserva;
 import Biblioteca.Entidades.Reserva;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,9 +27,9 @@ public class ListaReserva {
     }
     
     public void remover(String clienteNome) {
-        for (Reserva e : listaReserva) {
-            if(e.getClienteNome() == clienteNome){
-                listaReserva.remove(e);
+        for (Reserva r : listaReserva) {
+            if(r.getClienteNome() == clienteNome){
+                listaReserva.remove(r);
                 break;
             }
         }
@@ -36,11 +37,22 @@ public class ListaReserva {
     
     public boolean verificaRedundancia(String clienteNome, int livroId){
         String nome;
-        for (Reserva e : listaReserva) {
-            if(clienteNome.equals(e.getClienteNome()) && e.getLivroId() == livroId){
+        for (Reserva r : listaReserva) {
+            if(clienteNome.equals(r.getClienteNome()) && r.getLivroId() == livroId){
+                removeVencido();
                 return true;
             }
         }
+        removeVencido();
         return false;
+    }
+    
+    public void removeVencido(){
+        Date dataAtual = new Date(System.currentTimeMillis());
+        for (Reserva r : listaReserva) {
+            if(dataAtual.after(r.getDataReserva())){
+                listaReserva.remove(r);
+            }
+        }
     }
 }

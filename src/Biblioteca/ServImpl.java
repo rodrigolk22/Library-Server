@@ -70,7 +70,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     }
 
     @Override
-    public String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli) throws RemoteException {
+    public String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli, int tempoEspera) throws RemoteException {
         
         Livro livro = Servidor.listaLivro.consultar(livroId);
                 
@@ -85,7 +85,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             return "Reserva deste livro ja foi efetuada pelo usuário!";
         }
         //Efetua a reserva
-        Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli);
+        Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli, tempoEspera);
         Servidor.listaReserva.adicionar(reserva);
         
         System.out.println("Nova reserva:" + reserva);
