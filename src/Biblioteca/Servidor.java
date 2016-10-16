@@ -60,7 +60,7 @@ public class Servidor {
         livro_5.setAutor("Lara Sousa Pereira");
         livro_5.setTitulo("Bandeirantes modernos");
         livro_5.setCategoria("Literatura Brasileira");
-        livro_5.setQuantidade(3);
+        livro_5.setQuantidade(0);
         listaLivro.adicionar(livro_5);
         
         try {

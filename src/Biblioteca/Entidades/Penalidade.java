@@ -13,14 +13,14 @@ import java.util.Date;
  * Entidade para penalidades de um cliente.
  * @author Rodrigo e Jordan
  */
-public class Penalidade extends Ocorrencia {
+public class Penalidade extends Registro {
     
     private Date dataValidade;
 
     public Penalidade() {
         
         // calcula a data de valdiade da penalidade
-        dataValidade = new Date(this.getDataOcorrencia().getTime());
+        dataValidade = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance(); 
         c.setTime(dataValidade); 
         c.add(Calendar.DATE, Config.TEMPO_DIAS_PENALIDADE);
@@ -39,7 +39,7 @@ public class Penalidade extends Ocorrencia {
     public String toString() {
         return "Penalidade{" 
                 + "clienteNome=" + getClienteNome()
-                + ", dataOcorrencia=" + getDataOcorrencia() 
+                + ", dataRegistro=" + getDataRegistro() 
                 + ", dataValidade=" + dataValidade 
                 + '}';
     }

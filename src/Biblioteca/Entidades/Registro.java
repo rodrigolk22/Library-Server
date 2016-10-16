@@ -12,23 +12,23 @@ import java.util.Date;
  * Classe genérica para registrar ocorrências.
  * @author Rodrigo e Jordan
  */
-public abstract class Ocorrencia {
+public abstract class Registro {
     
     private String clienteNome;
     
-    private Date dataOcorrencia;
+    private Date dataRegistro;
     
-    public Ocorrencia () {
+    public Registro () {
         // seta a data atual ao criar a ocorrência
-        dataOcorrencia = new Date(System.currentTimeMillis());
+        dataRegistro = new Date(System.currentTimeMillis());
     }
 
-    public Date getDataOcorrencia() {
-        return dataOcorrencia;
+    public Date getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setDataOcorrencia(Date dataOcorrencia) {
-        this.dataOcorrencia = dataOcorrencia;
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
     public String getClienteNome() {

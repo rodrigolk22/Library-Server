@@ -13,7 +13,7 @@ import java.util.Date;
  * Ocorrencia de empréstimo de de um livro por um cliente.
  * @author Rodrigo e Jordan
  */
-public class Emprestimo extends Ocorrencia {
+public class Emprestimo extends Registro {
     
     private int livroId;
     
@@ -22,7 +22,7 @@ public class Emprestimo extends Ocorrencia {
     public Emprestimo(int livroId, String clienteNome) {
         
         // calcula a data de devolução
-        dataDevolucao = new Date(this.getDataOcorrencia().getTime());
+        dataDevolucao = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance(); 
         c.setTime(dataDevolucao); 
         c.add(Calendar.DATE, Config.TEMPO_MAXIMO_DIAS_EMPRESTIMO);
@@ -53,7 +53,7 @@ public class Emprestimo extends Ocorrencia {
     public String toString() {
         return "Emprestimo{" 
                 + "clienteNome=" + getClienteNome()
-                + ", dataOcorrencia=" + getDataOcorrencia() 
+                + ", dataRegistro=" + getDataRegistro() 
                 + ", livroId=" + livroId 
                 + ", dataDevolucao=" + dataDevolucao 
                 + '}';

@@ -6,8 +6,8 @@
 package Biblioteca;
 
 import Biblioteca.Entidades.*;
-import Biblioteca.Interfaces.InterfaceCli;
-import Biblioteca.Interfaces.InterfaceServ;
+import Biblioteca.Interfaces.*;
+import Biblioteca.Listas.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -72,9 +72,25 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     @Override
     public String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli) throws RemoteException {
         
-        // TODO
+        Livro livro = Servidor.listaLivro.consultar(livroId);
+                
+        if(livro == null){
+            return "Livro não encontrado! Reserva não efetuada!";
+        }else if(livro.getQuantidade() > 0){
+            return "Existe unidades disponíveis para empréstimo! Reserva não efetuada!";
+        }
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //Impede que seja feito mais uma reserva para o mesmo livro
+        if(Servidor.listaReserva.verificaRedundancia(clienteNome, livroId) == true){
+            return "Reserva deste livro ja foi efetuada pelo usuário!";
+        }
+        //Efetua a reserva
+        Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli);
+        Servidor.listaReserva.adicionar(reserva);
+        
+        System.out.println("Nova reserva:" + reserva);
+        
+        return "Reserva efetuada!";
     }
     
 }

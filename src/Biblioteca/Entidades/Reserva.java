@@ -12,7 +12,7 @@ import Biblioteca.Interfaces.InterfaceCli;
  * receber a notificação.
  * @author Rodrigo e Jordan
  */
-public class Reserva extends Ocorrencia {
+public class Reserva extends Registro {
     
     private int livroId;
     
@@ -44,7 +44,7 @@ public class Reserva extends Ocorrencia {
     public String toString() {
         return "Reserva{" 
                 + "clienteNome=" + getClienteNome()
-                + ", dataOcorrencia=" + getDataOcorrencia() 
+                + ", dataRegistro=" + getDataRegistro() 
                 + ", livroId=" + livroId
                 + '}';
     }
