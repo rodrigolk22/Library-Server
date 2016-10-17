@@ -2,6 +2,8 @@ package Biblioteca.Listas;
 
 import Biblioteca.Entidades.Penalidade;
 import Biblioteca.Entidades.Reserva;
+import Biblioteca.Interfaces.InterfaceCli;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,4 +68,16 @@ public class ListaReserva {
         return interessados;
     }
     
+    public void notificar(int livroId, String titulo) throws RemoteException{
+        Date dataAtual = new Date(System.currentTimeMillis());
+        InterfaceCli interfaceCli = null;
+        for (Reserva r : listaReserva) {
+            if(r.getLivroId() == livroId && dataAtual.before(r.getDataReserva())){
+                interfaceCli = r.getInterfaceCli();
+                interfaceCli.notificar("O livro "+titulo+" esta disponivel para emprestimo!");
+            }else if(dataAtual.after(r.getDataReserva())){
+                listaReserva.remove(r);
+            }
+        }
+    }
 }

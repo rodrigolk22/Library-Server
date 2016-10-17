@@ -61,6 +61,7 @@ public class Reserva extends Registro {
     }
 
     public void setDataReserva(int tempoEspera) {
+        dataReserva = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance();
         c.setTime(this.dataReserva);
         c.add(Calendar.DATE, +tempoEspera);

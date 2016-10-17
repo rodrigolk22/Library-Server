@@ -83,12 +83,12 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             Servidor.listaPenalidade.adicionar(penalidade);
             //Remove o livro da lista de emprestimo
             Servidor.listaEmprestimo.remover(livroId);
-            //TO DO Notificar os usuarios reserva
+            Servidor.listaReserva.notificar(livroId, livro.getTitulo());
             return "Livro devolvido com atraso! Registrada uma multa!";
         }else{
             //Remove o livro da lista de emprestimo
             Servidor.listaEmprestimo.remover(livroId);
-            //TO DO Notificar os usuarios reserva
+            Servidor.listaReserva.notificar(livroId, livro.getTitulo());
             return "Livro devolvido!";
         }
     }
