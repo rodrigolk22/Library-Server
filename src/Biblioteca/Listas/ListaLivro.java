@@ -6,10 +6,11 @@
 package Biblioteca.Listas;
 
 import Biblioteca.Entidades.Livro;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaLivro {
+public class ListaLivro implements Serializable {
 
     private List<Livro> listaLivro;
 
@@ -85,8 +86,8 @@ public class ListaLivro {
      *
      * @return
      */
-    public List todos() {
-        return listaLivro;
+    public ListaLivro todos() {
+        return this;
     }
 
     /**

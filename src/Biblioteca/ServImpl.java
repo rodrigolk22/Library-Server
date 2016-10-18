@@ -21,7 +21,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     public ServImpl() throws RemoteException {}
     
     @Override
-    public List<Livro> consultarTodosLivros() throws RemoteException {
+    public ListaLivro consultarTodosLivros() throws RemoteException {
         return Servidor.listaLivro.todos();
     }
     

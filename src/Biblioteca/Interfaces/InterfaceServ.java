@@ -6,6 +6,7 @@
 package Biblioteca.Interfaces;
 
 import Biblioteca.Entidades.Livro;
+import Biblioteca.Listas.ListaLivro;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -20,7 +21,7 @@ public interface InterfaceServ extends Remote {
      * @return
      * @throws RemoteException 
      */
-    public List<Livro> consultarTodosLivros() throws RemoteException;
+    public ListaLivro consultarTodosLivros() throws RemoteException;
     
     /**
      * Método remoto para consultar um livro no acervo por id.
