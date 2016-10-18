@@ -10,7 +10,6 @@ import Biblioteca.Interfaces.*;
 import Biblioteca.Listas.*;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 
 /**
  *
@@ -41,7 +40,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             return "Não há unidades disponíveis para empréstimo! Empréstimo não efetuado!";
         }else if(Servidor.listaEmprestimo.totalLivrosEmprestados(clienteNome) == Config.QUANTIDADE_MAXIMA_EMPRESTIMOS){
             return "O limite de livros para empréstimo foi atingido! Empréstimo não efetuado!";
-        }else if(Servidor.listaEmprestimo.contem(clienteNome, livroId) == true){
+        }else if(Servidor.listaEmprestimo.contem(livroId, clienteNome)){
             return "É limitado apenas um volume do mesmo livro por pessoa! Empréstimo não efetuado!";
         }
         
@@ -57,40 +56,49 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
 
     @Override
     public String renovarLivro(int livroId, String clienteNome) throws RemoteException {
-        if(Servidor.listaEmprestimo.contem(clienteNome, livroId) == false){
+        
+        if(!Servidor.listaEmprestimo.contem(livroId, clienteNome)){
             return "Renovação não disponível! Livro não consta como emprestado para o usuário!";
-        }else if(Servidor.listaReserva.interesse(livroId) > 0){
+        }else if(Servidor.listaReserva.quantidadeInteressados(livroId) > 0){
             return "Renovação não disponível! Livro foi reservado!";
-        }else if(Servidor.listaEmprestimo.pendencia(clienteNome) > 0){
+        }else if(Servidor.listaEmprestimo.quantidadePendencias(clienteNome) > 0){
             return "Renovação não disponivel! Existe livro com atraso para ser entregue!";
-        }else if(Servidor.listaPenalidade.pendencia(clienteNome) > 0){
+        }else if(Servidor.listaPenalidade.quantidadePendencias(clienteNome) > 0){
             return "Renovação não disponivel! Existe multa pendente!";
         }
-        Servidor.listaEmprestimo.extendePrazo(livroId, clienteNome);
+        
+        // extende o prazo do empréstimo
+        Emprestimo emprestimo = Servidor.listaEmprestimo.consultar(livroId, clienteNome);
+        emprestimo.extenderPrazo();
+        
         return "Emprestimo renovado!";
     }
 
     @Override
-    public String devolverLivro(int livroId) throws RemoteException {
+    public String devolverLivro(int livroId, String clienteNome) throws RemoteException {
         
+        // pega o empréstimo 
+        Emprestimo emprestimo = Servidor.listaEmprestimo.consultar(livroId, clienteNome);
+        
+        if (emprestimo == null) {
+            return "Você não havia emprestado esse livro!";
+        }
+        
+        // aumenta a quantidade do livro
         Livro livro = Servidor.listaLivro.consultar(livroId);
         livro.aumentarQuantidade();
-        //So pega o nome se tiver atrasado
-        String nomePenalidade = Servidor.listaEmprestimo.validade(livroId);
-        //Verifica se tem penalidade
-        if(nomePenalidade != ""){
-            Penalidade penalidade = new Penalidade(nomePenalidade);
+        
+        // remove o empréstimo da lista
+        Servidor.listaEmprestimo.remover(livroId, clienteNome);
+        
+        // se estiver vencido, registra uma penalidade
+        if(emprestimo.estaVencido()){
+            Penalidade penalidade = new Penalidade(clienteNome);
             Servidor.listaPenalidade.adicionar(penalidade);
-            //Remove o livro da lista de emprestimo
-            Servidor.listaEmprestimo.remover(livroId);
-            Servidor.listaReserva.notificar(livroId, livro.getTitulo());
-            return "Livro devolvido com atraso! Registrada uma multa!";
-        }else{
-            //Remove o livro da lista de emprestimo
-            Servidor.listaEmprestimo.remover(livroId);
-            Servidor.listaReserva.notificar(livroId, livro.getTitulo());
-            return "Livro devolvido!";
+            return  "Livro devolvido com atraso! Registrada uma multa!";
         }
+        
+        return "Livro devolvido!";
     }
 
     @Override
@@ -101,13 +109,14 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         if(livro == null){
             return "Livro não encontrado! Reserva não efetuada!";
         }else if(livro.getQuantidade() > 0){
-            return "Existe unidades disponíveis para empréstimo! Reserva não efetuada!";
+            return "Existem unidades disponíveis para empréstimo! Reserva não efetuada!";
         }
         
         //Impede que seja feito mais uma reserva para o mesmo livro
-        if(Servidor.listaReserva.contem(clienteNome, livroId) == true){
+        if(Servidor.listaReserva.contem(clienteNome, livroId)){
             return "Reserva deste livro ja foi efetuada pelo usuário!";
         }
+        
         //Efetua a reserva
         Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli, tempoEspera);
         Servidor.listaReserva.adicionar(reserva);

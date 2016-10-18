@@ -58,7 +58,7 @@ public class ListaReserva {
         }
     }
     
-    public int interesse(int livroId){
+    public int quantidadeInteressados(int livroId){
         int interessados = 0;
         for (Reserva r : listaReserva) {
             if(r.getLivroId() == livroId){
@@ -68,7 +68,7 @@ public class ListaReserva {
         return interessados;
     }
     
-    public void notificar(int livroId, String titulo) throws RemoteException{
+    public void notificarInteressados(int livroId, String titulo) throws RemoteException {
         Date dataAtual = new Date(System.currentTimeMillis());
         InterfaceCli interfaceCli = null;
         for (Reserva r : listaReserva) {

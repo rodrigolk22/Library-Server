@@ -43,6 +43,7 @@ public interface InterfaceServ extends Remote {
     /**
      * Método remoto para renovar o empréstimo de um livro do acervo.
      * @param livroId
+     * @param clienteNome 
      * @return
      * @throws RemoteException 
      */
@@ -51,10 +52,11 @@ public interface InterfaceServ extends Remote {
     /**
      * Método remoto para devolver um livro emprestado ao acervo.
      * @param livroId
+     * @param clienteNome 
      * @return
      * @throws RemoteException 
      */
-    public String devolverLivro(int livroId) throws RemoteException;
+    public String devolverLivro(int livroId, String clienteNome) throws RemoteException;
     
     /**
      * Método remoto para reservar um livro que foi emprestado do acervo.

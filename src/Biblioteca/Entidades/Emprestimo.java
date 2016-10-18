@@ -17,16 +17,16 @@ public class Emprestimo extends Registro {
     
     private int livroId;
     
-    private Date dataDevolucao;
+    private Date dataParaDevolucao;
 
     public Emprestimo(int livroId, String clienteNome) {
         
         // calcula a data de devolução
-        dataDevolucao = new Date(this.getDataRegistro().getTime());
+        dataParaDevolucao = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance(); 
-        c.setTime(dataDevolucao); 
+        c.setTime(dataParaDevolucao); 
         c.add(Calendar.DATE, Config.TEMPO_MAXIMO_DIAS_EMPRESTIMO);
-        dataDevolucao = c.getTime();
+        dataParaDevolucao = c.getTime();
           
         // adiciona o nome do cliente e o id do livro
         setClienteNome(clienteNome);
@@ -41,12 +41,27 @@ public class Emprestimo extends Registro {
         this.livroId = livroId;
     }
     
-    public Date getDataDevolucao() {
-        return dataDevolucao;
+    public Date getDataParaDevolucao() {
+        return dataParaDevolucao;
     }
 
-    public void setDataDevolucao(Date dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
+    public void setDataParaDevolucao(Date dataDevolucao) {
+        this.dataParaDevolucao = dataDevolucao;
+    }
+    
+    public boolean estaVencido() {
+        Date dataAtual = new Date(System.currentTimeMillis());
+        if(dataAtual.after(this.getDataParaDevolucao())){
+            return true;
+        }
+        return false;
+    }
+    
+    public void extenderPrazo(){
+        Calendar c = Calendar.getInstance(); 
+        c.setTime(this.getDataParaDevolucao()); 
+        c.add(Calendar.DATE, Config.TEMPO_MAXIMO_DIAS_EMPRESTIMO);
+        this.setDataParaDevolucao(c.getTime());
     }
 
     @Override
@@ -55,7 +70,7 @@ public class Emprestimo extends Registro {
                 + "clienteNome=" + getClienteNome()
                 + ", dataRegistro=" + getDataRegistro() 
                 + ", livroId=" + livroId 
-                + ", dataDevolucao=" + dataDevolucao 
+                + ", dataDevolucao=" + dataParaDevolucao 
                 + '}';
     }
 }

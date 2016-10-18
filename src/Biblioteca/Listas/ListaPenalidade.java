@@ -29,7 +29,7 @@ public class ListaPenalidade {
     public void adicionar(Penalidade penalidade){
         listaPenalidade.add(penalidade);
     }
-    public int pendencia(String clienteNome) {
+    public int quantidadePendencias(String clienteNome) {
         int pendencia = 0;
         Date dataAtual = new Date(System.currentTimeMillis());
         for (Penalidade p : listaPenalidade) {
