@@ -30,8 +30,8 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     }
 
     @Override
-    public String emprestarLivro(int livroId, String clienteNome) throws RemoteException {
-        synchronized (Servidor.listaLivro){
+    public synchronized String emprestarLivro(int livroId, String clienteNome) throws RemoteException {
+        
             Livro livro = Servidor.listaLivro.consultar(livroId);
 
             if(livro == null){
@@ -56,7 +56,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             Servidor.listaEmprestimo.adicionar(emprestimo);
 
             System.out.println("Novo empréstimo: " + emprestimo);
-        }
+        
         return "Empréstimo foi efetuado!";
     }
 
@@ -118,8 +118,8 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
     }
 
     @Override
-    public String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli, int tempoEspera) throws RemoteException {
-        synchronized (Servidor.listaLivro){
+    public synchronized String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli, int tempoEspera) throws RemoteException {
+        
             Livro livro = Servidor.listaLivro.consultar(livroId);
 
             if(livro == null){
@@ -135,7 +135,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             Servidor.listaReserva.adicionar(reserva);
 
             System.out.println("Nova reserva: " + reserva);
-        }
+        
         return "Reserva efetuada!";
     }
     

@@ -58,10 +58,7 @@ public class ListaReserva {
         for (Reserva reserva : listaReserva) {
             //System.out.println(dataAtual);
             //System.out.println(reserva.getDataReserva());
-            // remove reservas vencidas
-            if(dataAtual.after(reserva.getDataReserva())){
-                listaReserva.remove(reserva);
-            }
+            
             
             if(clienteNome.equals(reserva.getClienteNome()) && reserva.getLivroId() == livroId){
                 return true;
@@ -76,13 +73,10 @@ public class ListaReserva {
      * @return 
      */
     public int quantidadeInteressados(int livroId){
-        Date dataAtual = new Date(System.currentTimeMillis());
         int interessados = 0;
         for (Reserva reserva : listaReserva) {
             // remove reservas vencidas
-            if(dataAtual.after(reserva.getDataReserva())){
-                listaReserva.remove(reserva);
-            }else if(reserva.getLivroId() == livroId){
+            if(reserva.getLivroId() == livroId){
                 interessados++;
             }
         }
@@ -98,6 +92,7 @@ public class ListaReserva {
      */
     public void notificarInteressados(int livroId, String titulo) throws RemoteException {
         Date dataAtual = new Date(System.currentTimeMillis());
+        List<Reserva> novaLista = new ArrayList<>();
         InterfaceCli interfaceCli = null;
         for (Reserva reserva : listaReserva) {
             if(reserva.getLivroId() == livroId && dataAtual.before(reserva.getDataReserva())){
@@ -105,10 +100,9 @@ public class ListaReserva {
                 //System.out.println(reserva.getDataReserva());
                 interfaceCli = reserva.getInterfaceCli();
                 interfaceCli.notificar("O livro " + titulo + " está disponível para empréstimo!");
-            }else if(dataAtual.after(reserva.getDataReserva())){
-                // remove reservas vencidas
-                listaReserva.remove(reserva);
+                novaLista.add(reserva);
             }
         }
+        this.listaReserva = novaLista;
     }
 }

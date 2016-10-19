@@ -15,7 +15,7 @@ public class Config {
      * Tempo máximo que uma pessoa pode ficar com um livro emprestado
      * do acervo.
      */
-    public static final int TEMPO_MAXIMO_DIAS_EMPRESTIMO = 7;
+    public static final int TEMPO_MAXIMO_DIAS_EMPRESTIMO = 1;
     
     /**
      * Quantidade máxima de empréstimos que uma pessoa 

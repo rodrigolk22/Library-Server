@@ -38,7 +38,7 @@ public class ListaPenalidade {
         int pendencia = 0;
         Date dataAtual = new Date(System.currentTimeMillis());
         for (Penalidade p : listaPenalidade) {
-            if(clienteNome.equals(p.getClienteNome())){
+            if(clienteNome.equals(p.getClienteNome()) && dataAtual.after(p.getDataValidade())){
                 pendencia++;
             }
         }

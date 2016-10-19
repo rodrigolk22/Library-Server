@@ -31,7 +31,7 @@ public class Emprestimo extends Registro {
         dataParaDevolucao = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance(); 
         c.setTime(dataParaDevolucao); 
-        c.add(Calendar.DATE, Config.TEMPO_MAXIMO_DIAS_EMPRESTIMO);
+        c.add(Calendar.MINUTE, Config.TEMPO_MAXIMO_DIAS_EMPRESTIMO);
         dataParaDevolucao = c.getTime();
           
         // adiciona o nome do cliente e o id do livro
