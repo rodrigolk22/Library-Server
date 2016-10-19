@@ -46,6 +46,12 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         
         livro.reduzirQuantidade();
         
+        // remove um registro de reserva para o cliente, caso haja
+        if (Servidor.listaReserva.contem(livroId, clienteNome)) {
+            Servidor.listaReserva.remover(livroId, clienteNome);
+        }
+        
+        // cria o empréstimo
         Emprestimo emprestimo = new Emprestimo(livroId, clienteNome);
         Servidor.listaEmprestimo.adicionar(emprestimo);
         

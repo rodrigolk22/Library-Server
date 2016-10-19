@@ -35,9 +35,9 @@ public class ListaReserva {
      * Remove uma reserva da lista.
      * @param clienteNome 
      */
-    public void remover(String clienteNome) {
+    public void remover(int livroId, String clienteNome) {
         for (Reserva r : listaReserva) {
-            if(r.getClienteNome().equals(clienteNome)){
+            if(r.getClienteNome().equals(clienteNome) && r.getLivroId() == livroId){
                 listaReserva.remove(r);
                 break;
             }
