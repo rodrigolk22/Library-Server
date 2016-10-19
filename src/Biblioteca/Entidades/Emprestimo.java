@@ -10,13 +10,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Ocorrencia de empréstimo de de um livro por um cliente.
+ * Registro de empréstimo de de um livro por um cliente.
  * @author Rodrigo e Jordan
  */
 public class Emprestimo extends Registro {
     
+    /**
+     * Id do livro emprestado
+     */
     private int livroId;
     
+    /**
+     * Data de vencimento do empréstimo (até quando o cliente deve devolver)
+     */
     private Date dataParaDevolucao;
 
     public Emprestimo(int livroId, String clienteNome) {
@@ -49,6 +55,10 @@ public class Emprestimo extends Registro {
         this.dataParaDevolucao = dataDevolucao;
     }
     
+    /**
+     * Verifica se a data de devolução foi ultrapassada a partir da data atual.
+     * @return 
+     */
     public boolean estaVencido() {
         Date dataAtual = new Date(System.currentTimeMillis());
         if(dataAtual.after(this.getDataParaDevolucao())){
@@ -57,6 +67,9 @@ public class Emprestimo extends Registro {
         return false;
     }
     
+    /**
+     * Extende o prazo do empréstimo (para o caso de uma renovação)
+     */
     public void extenderPrazo(){
         Calendar c = Calendar.getInstance(); 
         c.setTime(this.getDataParaDevolucao()); 

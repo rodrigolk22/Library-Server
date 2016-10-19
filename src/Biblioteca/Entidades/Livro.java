@@ -7,26 +7,36 @@ package Biblioteca.Entidades;
 
 import java.io.Serializable;
 
-
-
 /**
- *
+ * Entidade de Livro
  * @author Rodrigo e Jordan
  */
-
 public class Livro implements Serializable {
     
+    /**
+     * Identificador único do livro.
+     */
     private int id;
     
+    /**
+     * Quantidade disponível para empréstimo no acervo.
+     */
     private int quantidade;
 
+    /**
+     * Título do livro.
+     */
     private String titulo;
 
+    /**
+     * Nome do autor do livro.
+     */
     private String autor;
 
+    /**
+     * Categoria do livro.
+     */
     private String categoria;
-
-    public Livro() { }
 
     public int getId() {
         return id;
@@ -44,10 +54,16 @@ public class Livro implements Serializable {
         this.quantidade = quantidade;
     }
     
+    /**
+     * Decrementa a quantidade disponível do livro no acervo.
+     */
     public void reduzirQuantidade() {
         this.quantidade--;
     }
     
+    /**
+     * Incrementa a quantidade disponível do livro no acervo.
+     */
     public void aumentarQuantidade() {
         this.quantidade++;
     }

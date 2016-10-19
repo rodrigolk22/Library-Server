@@ -10,13 +10,21 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Entidade para penalidades de um cliente.
+ * Registro de penalidade de um cliente.
  * @author Rodrigo e Jordan
  */
 public class Penalidade extends Registro {
     
+    /**
+     * Data de validade da penalidade.
+     */
     private Date dataValidade;
 
+    /**
+     * Construtor da penalidade. Gera automaticamente a data de validade 
+     * ao instanciar uma penalidade.
+     * @param clienteNome nome do cliente que vai receber a penalidade
+     */
     public Penalidade(String clienteNome) {
         setClienteNome(clienteNome);
         // calcula a data de validade da penalidade

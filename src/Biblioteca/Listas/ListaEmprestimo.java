@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Biblioteca.Listas;
 
 import Biblioteca.Entidades.Emprestimo;
@@ -26,10 +21,19 @@ public class ListaEmprestimo {
         return listaEmprestimo;
     }
     
+    /**
+     * Adiciona um empréstimo na lista
+     * @param emprestimo
+     */
     public void adicionar(Emprestimo emprestimo){
         listaEmprestimo.add(emprestimo);
     }
     
+    /**
+     * Remove um empréstimo da lista
+     * @param livroId
+     * @param clienteNome 
+     */
     public void remover(int livroId, String clienteNome) {
         for (Emprestimo e : listaEmprestimo) {
             if(e.getLivroId() == livroId && e.getClienteNome().equals(clienteNome)){
@@ -39,6 +43,11 @@ public class ListaEmprestimo {
         }
     }
     
+    /**
+     * Conta a quantidade de livros emprestados por um cliente.
+     * @param clienteNome
+     * @return 
+     */
     public int totalLivrosEmprestados(String clienteNome){
         int quantidadeLivro = 0;
         for (Emprestimo e : listaEmprestimo) {
@@ -49,6 +58,12 @@ public class ListaEmprestimo {
         return quantidadeLivro;
     }
     
+    /**
+     * Verifica se a lista contém um empréstimo do livro e cliente especificados.
+     * @param livroId
+     * @param clienteNome
+     * @return 
+     */
     public boolean contem(int livroId, String clienteNome){
         for (Emprestimo e : listaEmprestimo) {
             if(clienteNome.equals(e.getClienteNome()) && e.getLivroId() == livroId){
@@ -58,6 +73,12 @@ public class ListaEmprestimo {
         return false;
     }
     
+    /**
+     * Retorna um empréstimo especificado. Se o empréstimo não existir, retorna nulo.
+     * @param livroId
+     * @param clienteNome
+     * @return 
+     */
     public Emprestimo consultar(int livroId, String clienteNome) {
         for (Emprestimo e : listaEmprestimo) {
             if(e.getLivroId() == livroId && clienteNome.equals(e.getClienteNome())){
@@ -67,6 +88,11 @@ public class ListaEmprestimo {
         return null;
     }
     
+    /**
+     * Conta a quantidade de empréstimo pendentes para um cliente.
+     * @param clienteNome
+     * @return 
+     */
     public int quantidadePendencias(String clienteNome) {
         int pendencia = 0;
         Date dataAtual = new Date(System.currentTimeMillis());

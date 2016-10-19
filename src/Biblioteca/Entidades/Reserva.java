@@ -10,20 +10,39 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Entidade para reserva de um livro contendo a interface do cliente que deverá 
+ * Registro reserva de um livro contendo a interface do cliente que deverá 
  * receber a notificação.
  * @author Rodrigo e Jordan
  */
 public class Reserva extends Registro {
     
+    /**
+     * ID do livro reservado.
+     */
     private int livroId;
     
+    /**
+     * Referência da interface do cliente que irá receber a notificação.
+     */
     private InterfaceCli interfaceCli;
     
+    /**
+     * Tempo máximo em dias que o cliente ficará esperando a notficação.
+     */
     private int tempoEspera;
 
+    /**
+     * Data máxima para espera da notificação.
+     */
     private Date dataReserva;
     
+    /**
+     * Contrutor da Reserva. 
+     * @param livroId
+     * @param clienteNome
+     * @param interfaceCli
+     * @param tempoEspera 
+     */
     public Reserva(int livroId, String clienteNome, InterfaceCli interfaceCli, int tempoEspera) {
         setClienteNome(clienteNome);
         this.livroId = livroId;
@@ -60,13 +79,17 @@ public class Reserva extends Registro {
         return dataReserva;
     }
 
+    /**
+     * Gera automaticamente a data de reserva a partir da
+     * data de criação da reserva somado ao tempo de espera.
+     * @param tempoEspera 
+     */
     public void setDataReserva(int tempoEspera) {
         dataReserva = new Date(this.getDataRegistro().getTime());
         Calendar c = Calendar.getInstance();
         c.setTime(this.dataReserva);
         c.add(Calendar.DATE, +tempoEspera);
         this.dataReserva = c.getTime();
-        
     }
     
     @Override

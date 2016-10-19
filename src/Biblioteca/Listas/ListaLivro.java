@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Biblioteca.Listas;
 
 import Biblioteca.Entidades.Livro;
@@ -27,8 +22,7 @@ public class ListaLivro implements Serializable {
     }
 
     /**
-     * Adiciona um livro na lista
-     *
+     * Adiciona um livro na lista.
      * @param livro
      */
     public void adicionar(Livro livro) {
@@ -36,8 +30,7 @@ public class ListaLivro implements Serializable {
     }
 
     /**
-     * Verifica se a lista contém um livro com o id especificado
-     *
+     * Verifica se a lista contém um livro com o id especificado.
      * @param livroId
      * @return
      */
@@ -52,8 +45,7 @@ public class ListaLivro implements Serializable {
     }
 
     /**
-     * Remove um livro da lista com o id especificado
-     *
+     * Remove um livro da lista com o id especificado.
      * @param livroId
      */
     public void remover(int livroId) {
@@ -66,8 +58,7 @@ public class ListaLivro implements Serializable {
     }
 
     /**
-     * Atualiza os dados de um livro
-     *
+     * Atualiza os dados de um livro.
      * @param livro
      */
     public void atualizar(Livro livro) {
@@ -82,8 +73,7 @@ public class ListaLivro implements Serializable {
     }
 
     /**
-     * Retorna todos os livros da lista
-     *
+     * Retorna todos os livros da lista.
      * @return
      */
     public ListaLivro todos() {
@@ -93,7 +83,6 @@ public class ListaLivro implements Serializable {
     /**
      * Retorna todos os livros disponíveis para empréstimo, ou seja, aqueles que
      * tem quantidade maior que 0.
-     *
      * @return List
      */
     public List todosDisponiveis() {

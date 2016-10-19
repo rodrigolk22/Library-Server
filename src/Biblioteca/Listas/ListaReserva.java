@@ -1,6 +1,5 @@
 package Biblioteca.Listas;
 
-import Biblioteca.Entidades.Penalidade;
 import Biblioteca.Entidades.Reserva;
 import Biblioteca.Interfaces.InterfaceCli;
 import java.rmi.RemoteException;
@@ -24,59 +23,83 @@ public class ListaReserva {
         return listaReserva;
     }
     
+    /**
+     * Adiciona uma reserva na lista.
+     * @param reserva 
+     */
     public void adicionar(Reserva reserva){
         listaReserva.add(reserva);
     }
     
+    /**
+     * Remove uma reserva da lista.
+     * @param clienteNome 
+     */
     public void remover(String clienteNome) {
         for (Reserva r : listaReserva) {
-            if(r.getClienteNome() == clienteNome){
+            if(r.getClienteNome().equals(clienteNome)){
                 listaReserva.remove(r);
                 break;
             }
         }
     }
     
-    public boolean contem(int livroId,String clienteNome){
-        String nome;
-        for (Reserva r : listaReserva) {
-            if(clienteNome.equals(r.getClienteNome()) && r.getLivroId() == livroId){
-                removeVencido();
+    /**
+     * Verifica se a lista contém uma reserva com o id especificado. 
+     * Enquanto percorre as reservas, já remove as vencidas.
+     * @param livroId
+     * @param clienteNome
+     * @return 
+     */
+    public boolean contem(int livroId, String clienteNome){
+        
+        Date dataAtual = new Date(System.currentTimeMillis());
+        
+        for (Reserva reserva : listaReserva) {
+            
+            // remove reservas vencidas
+            if(dataAtual.after(reserva.getDataReserva())){
+                listaReserva.remove(reserva);
+            }
+            
+            if(clienteNome.equals(reserva.getClienteNome()) && reserva.getLivroId() == livroId){
                 return true;
             }
         }
-        removeVencido();
         return false;
     }
     
-    public void removeVencido(){
-        Date dataAtual = new Date(System.currentTimeMillis());
-        for (Reserva r : listaReserva) {
-            if(dataAtual.after(r.getDataReserva())){
-                listaReserva.remove(r);
-            }
-        }
-    }
-    
+    /**
+     * Conta a quantidade de clientes que reservaram o livro.
+     * @param livroId
+     * @return 
+     */
     public int quantidadeInteressados(int livroId){
         int interessados = 0;
-        for (Reserva r : listaReserva) {
-            if(r.getLivroId() == livroId){
+        for (Reserva reserva : listaReserva) {
+            if(reserva.getLivroId() == livroId){
                 interessados++;
             }
         }
         return interessados;
     }
     
+    /**
+     * Notifica a lista de interessados por um livro através de chamada remota
+     * usando a referência para a sua interface.
+     * @param livroId
+     * @param titulo
+     * @throws RemoteException 
+     */
     public void notificarInteressados(int livroId, String titulo) throws RemoteException {
         Date dataAtual = new Date(System.currentTimeMillis());
         InterfaceCli interfaceCli = null;
-        for (Reserva r : listaReserva) {
-            if(r.getLivroId() == livroId && dataAtual.before(r.getDataReserva())){
-                interfaceCli = r.getInterfaceCli();
-                interfaceCli.notificar("O livro "+titulo+" esta disponivel para emprestimo!");
-            }else if(dataAtual.after(r.getDataReserva())){
-                listaReserva.remove(r);
+        for (Reserva reserva : listaReserva) {
+            if(reserva.getLivroId() == livroId && dataAtual.before(reserva.getDataReserva())){
+                interfaceCli = reserva.getInterfaceCli();
+                interfaceCli.notificar("O livro " + titulo + " está disponível para empréstimo!");
+            }else if(dataAtual.after(reserva.getDataReserva())){
+                listaReserva.remove(reserva);
             }
         }
     }

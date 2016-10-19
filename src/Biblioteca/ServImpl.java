@@ -49,7 +49,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         Emprestimo emprestimo = new Emprestimo(livroId, clienteNome);
         Servidor.listaEmprestimo.adicionar(emprestimo);
         
-        System.out.println("Novo empréstimo:" + emprestimo);
+        System.out.println("Novo empréstimo: " + emprestimo);
         
         return "Empréstimo foi efetuado!";
     }
@@ -70,6 +70,8 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         // extende o prazo do empréstimo
         Emprestimo emprestimo = Servidor.listaEmprestimo.consultar(livroId, clienteNome);
         emprestimo.extenderPrazo();
+        
+        System.out.println("Renovação empréstimo: " + emprestimo);
         
         return "Emprestimo renovado!";
     }
@@ -98,8 +100,13 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         if(emprestimo.estaVencido()){
             Penalidade penalidade = new Penalidade(clienteNome);
             Servidor.listaPenalidade.adicionar(penalidade);
+            
+            System.out.println("Empréstimo devolvido, mas com atraso: " + emprestimo);
+            
             return  "Livro devolvido com atraso! Registrada uma multa!";
         }
+        
+        System.out.println("Empréstimo devolvido: " + emprestimo);
         
         return "Livro devolvido!";
     }
@@ -121,7 +128,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli, tempoEspera);
         Servidor.listaReserva.adicionar(reserva);
         
-        System.out.println("Nova reserva:" + reserva);
+        System.out.println("Nova reserva: " + reserva);
         
         return "Reserva efetuada!";
     }

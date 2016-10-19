@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Biblioteca.Listas;
 
 import Biblioteca.Entidades.Penalidade;
@@ -26,9 +21,19 @@ public class ListaPenalidade {
         return listaPenalidade;
     }
     
+    /**
+     * Adiciona uma penalidade na lista.
+     * @param penalidade 
+     */
     public void adicionar(Penalidade penalidade){
         listaPenalidade.add(penalidade);
     }
+    
+    /**
+     * Conta a quantidade de penalidades ativas para o cliente.
+     * @param clienteNome
+     * @return 
+     */
     public int quantidadePendencias(String clienteNome) {
         int pendencia = 0;
         Date dataAtual = new Date(System.currentTimeMillis());
