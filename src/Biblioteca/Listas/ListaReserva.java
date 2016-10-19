@@ -37,7 +37,7 @@ public class ListaReserva {
         }
     }
     
-    public boolean contem(String clienteNome, int livroId){
+    public boolean contem(int livroId,String clienteNome){
         String nome;
         for (Reserva r : listaReserva) {
             if(clienteNome.equals(r.getClienteNome()) && r.getLivroId() == livroId){

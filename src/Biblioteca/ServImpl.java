@@ -112,8 +112,8 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             return "Existem unidades disponíveis para empréstimo! Reserva não efetuada!";
         }
         
-        //Impede que seja feito mais uma reserva para o mesmo livro
-        if(Servidor.listaReserva.contem(clienteNome, livroId)){
+        //Impede que seja feita mais uma reserva para o mesmo livro
+        if(Servidor.listaReserva.contem(livroId, clienteNome)){
             return "Reserva deste livro ja foi efetuada pelo usuário!";
         }
         
