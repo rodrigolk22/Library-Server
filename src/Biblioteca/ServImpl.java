@@ -88,6 +88,9 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
         Livro livro = Servidor.listaLivro.consultar(livroId);
         livro.aumentarQuantidade();
         
+        // notifica os interessados
+        Servidor.listaReserva.notificarInteressados(livro.getId(), livro.getTitulo());
+        
         // remove o empréstimo da lista
         Servidor.listaEmprestimo.remover(livroId, clienteNome);
         
@@ -110,10 +113,7 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
             return "Livro não encontrado! Reserva não efetuada!";
         }else if(livro.getQuantidade() > 0){
             return "Existem unidades disponíveis para empréstimo! Reserva não efetuada!";
-        }
-        
-        //Impede que seja feita mais uma reserva para o mesmo livro
-        if(Servidor.listaReserva.contem(livroId, clienteNome)){
+        } else if(Servidor.listaReserva.contem(livroId, clienteNome)){
             return "Reserva deste livro ja foi efetuada pelo usuário!";
         }
         
