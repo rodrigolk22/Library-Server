@@ -31,32 +31,32 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
 
     @Override
     public String emprestarLivro(int livroId, String clienteNome) throws RemoteException {
-        
-        Livro livro = Servidor.listaLivro.consultar(livroId);
-        
-        if(livro == null){
-            return "Livro não encontrado! Empréstimo não efetuado!";
-        }else if(livro.getQuantidade() == 0){
-            return "Não há unidades disponíveis para empréstimo! Empréstimo não efetuado!";
-        }else if(Servidor.listaEmprestimo.totalLivrosEmprestados(clienteNome) == Config.QUANTIDADE_MAXIMA_EMPRESTIMOS){
-            return "O limite de livros para empréstimo foi atingido! Empréstimo não efetuado!";
-        }else if(Servidor.listaEmprestimo.contem(livroId, clienteNome)){
-            return "É limitado apenas um volume do mesmo livro por pessoa! Empréstimo não efetuado!";
+        synchronized (Servidor.listaLivro){
+            Livro livro = Servidor.listaLivro.consultar(livroId);
+
+            if(livro == null){
+                return "Livro não encontrado! Empréstimo não efetuado!";
+            }else if(livro.getQuantidade() == 0){
+                return "Não há unidades disponíveis para empréstimo! Empréstimo não efetuado!";
+            }else if(Servidor.listaEmprestimo.totalLivrosEmprestados(clienteNome) == Config.QUANTIDADE_MAXIMA_EMPRESTIMOS){
+                return "O limite de livros para empréstimo foi atingido! Empréstimo não efetuado!";
+            }else if(Servidor.listaEmprestimo.contem(livroId, clienteNome)){
+                return "É limitado apenas um volume do mesmo livro por pessoa! Empréstimo não efetuado!";
+            }
+
+            livro.reduzirQuantidade();
+
+            // remove um registro de reserva para o cliente, caso haja
+            if (Servidor.listaReserva.contem(livroId, clienteNome)) {
+                Servidor.listaReserva.remover(livroId, clienteNome);
+            }
+
+            // cria o empréstimo
+            Emprestimo emprestimo = new Emprestimo(livroId, clienteNome);
+            Servidor.listaEmprestimo.adicionar(emprestimo);
+
+            System.out.println("Novo empréstimo: " + emprestimo);
         }
-        
-        livro.reduzirQuantidade();
-        
-        // remove um registro de reserva para o cliente, caso haja
-        if (Servidor.listaReserva.contem(livroId, clienteNome)) {
-            Servidor.listaReserva.remover(livroId, clienteNome);
-        }
-        
-        // cria o empréstimo
-        Emprestimo emprestimo = new Emprestimo(livroId, clienteNome);
-        Servidor.listaEmprestimo.adicionar(emprestimo);
-        
-        System.out.println("Novo empréstimo: " + emprestimo);
-        
         return "Empréstimo foi efetuado!";
     }
 
@@ -119,23 +119,23 @@ public class ServImpl extends UnicastRemoteObject implements InterfaceServ {
 
     @Override
     public String reservarLivro(int livroId, String clienteNome, InterfaceCli interfaceCli, int tempoEspera) throws RemoteException {
-        
-        Livro livro = Servidor.listaLivro.consultar(livroId);
-                
-        if(livro == null){
-            return "Livro não encontrado! Reserva não efetuada!";
-        }else if(livro.getQuantidade() > 0){
-            return "Existem unidades disponíveis para empréstimo! Reserva não efetuada!";
-        } else if(Servidor.listaReserva.contem(livroId, clienteNome)){
-            return "Reserva deste livro ja foi efetuada pelo usuário!";
+        synchronized (Servidor.listaLivro){
+            Livro livro = Servidor.listaLivro.consultar(livroId);
+
+            if(livro == null){
+                return "Livro não encontrado! Reserva não efetuada!";
+            }else if(livro.getQuantidade() > 0){
+                return "Existem unidades disponíveis para empréstimo! Reserva não efetuada!";
+            } else if(Servidor.listaReserva.contem(livroId, clienteNome)){
+                return "Reserva deste livro ja foi efetuada pelo usuário!";
+            }
+
+            //Efetua a reserva
+            Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli, tempoEspera);
+            Servidor.listaReserva.adicionar(reserva);
+
+            System.out.println("Nova reserva: " + reserva);
         }
-        
-        //Efetua a reserva
-        Reserva reserva = new Reserva(livroId, clienteNome, interfaceCli, tempoEspera);
-        Servidor.listaReserva.adicionar(reserva);
-        
-        System.out.println("Nova reserva: " + reserva);
-        
         return "Reserva efetuada!";
     }
     
