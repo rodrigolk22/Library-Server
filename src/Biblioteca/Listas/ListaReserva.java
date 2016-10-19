@@ -56,7 +56,8 @@ public class ListaReserva {
         Date dataAtual = new Date(System.currentTimeMillis());
         
         for (Reserva reserva : listaReserva) {
-            
+            //System.out.println(dataAtual);
+            //System.out.println(reserva.getDataReserva());
             // remove reservas vencidas
             if(dataAtual.after(reserva.getDataReserva())){
                 listaReserva.remove(reserva);
@@ -75,9 +76,13 @@ public class ListaReserva {
      * @return 
      */
     public int quantidadeInteressados(int livroId){
+        Date dataAtual = new Date(System.currentTimeMillis());
         int interessados = 0;
         for (Reserva reserva : listaReserva) {
-            if(reserva.getLivroId() == livroId){
+            // remove reservas vencidas
+            if(dataAtual.after(reserva.getDataReserva())){
+                listaReserva.remove(reserva);
+            }else if(reserva.getLivroId() == livroId){
                 interessados++;
             }
         }
@@ -96,9 +101,12 @@ public class ListaReserva {
         InterfaceCli interfaceCli = null;
         for (Reserva reserva : listaReserva) {
             if(reserva.getLivroId() == livroId && dataAtual.before(reserva.getDataReserva())){
+                //System.out.println(dataAtual);
+                //System.out.println(reserva.getDataReserva());
                 interfaceCli = reserva.getInterfaceCli();
                 interfaceCli.notificar("O livro " + titulo + " está disponível para empréstimo!");
             }else if(dataAtual.after(reserva.getDataReserva())){
+                // remove reservas vencidas
                 listaReserva.remove(reserva);
             }
         }
